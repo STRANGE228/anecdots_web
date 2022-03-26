@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block right %}
+<h4>Добавление анекдота</h4>
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <table>
+        {% for field in form if field.name not in ['submit', 'csrf_token'] %}
+        <tr>
+
+            <td style="padding: 5px">{{ field.label }}</td>
+            <td style="padding: 5px">{{ field() }}</td>
+            <td style="padding: 5px">{% for error in field.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+                {% endfor %}
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+
+</form>
+{% endblock %}

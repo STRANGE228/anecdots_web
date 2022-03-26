@@ -1,0 +1,42 @@
+﻿/* Стили */
+
+h1 {
+    color: #ce55d2;
+    margin-left: 40px
+}
+h2 {
+    color: #000000;
+    text-align: center;
+
+}
+
+h4 {
+    padding-left: 20px;
+    text-align: center;
+}
+
+.right-block {
+    background-color: #9e9e9e;
+    height: 100vh;
+}
+
+
+.main-block {
+    background-color: #d6d6e6;
+    height: 100vh;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-item {
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.table-bordered {
+    border: 2px solid #ff9aff;
+}
+

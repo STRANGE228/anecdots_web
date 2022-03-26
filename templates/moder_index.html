@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block right %}
+
+{% endblock %}
+
+{% block content %}
+
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Анекдоты</h2>
+<div class="container-fluid">
+    {% for item in anecdots%}
+    <table class="table table-bordered">
+        <tr>
+            <td>{{item.anecdote}}</td>
+        </tr>
+        <tr>
+            <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
+        </tr>
+        <tr><td>Рейтинг: {{item.rating}}</td></tr>
+        {% if current_user.is_authenticated and (current_user == item.user or current_user.id == 1) %}
+            <td>
+                <a href="/post_bid/{{ item.id }}" class="btn btn-warning">
+                    Добавить
+                </a>
+                <a href="/delete_bid/{{ item.id }}" class="btn btn-danger">
+                    Удалить
+                </a>
+            </td>
+            {% endif %}
+    </table>
+    {% endfor %}
+    <div></div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block right %}
+<h4>Вход в систему</h4>
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    {%  for field in form if field.name not in ['submit', 'csrf_token'] %}
+
+    <p>
+        {{ field.label }}
+        {{ field(class="form-control") }}
+        {% for error in field.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+
+    {% endfor %}
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+
+</form>
+{% endblock %}
