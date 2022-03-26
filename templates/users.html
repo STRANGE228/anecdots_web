@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Анекдоты</h2>
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Пользователи</h2>
 <div class="container-fluid">
     {% for item in users%}
     <table class="table table-bordered">
@@ -14,17 +14,40 @@
             <td>{{item.nickname}}</td>
         </tr>
         <tr>
-            <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
+            <td><a>email - {{item.email}}</a><a>&emsp;&emsp;&emsp;&emsp;рейтинг - {{item.rating}}</a>
+            <a>&emsp;&emsp;&emsp;&emsp;</a>
+                {% if item.role == 'moder' %}
+                <a>роль - Модератор</a>
+                {% elif item.role == 'user' %}
+                <a>роль - Пользователь</a>
+                {% elif item.role == 'admin' %}
+                <a>роль - Админ</a>
+                {% endif %}
+            </td>
         </tr>
-        <tr><td>Рейтинг: {{item.rating}}</td></tr>
-        {% if current_user.is_authenticated and (current_user == item.user or current_user.id == 1) %}
+        {% if current_user.is_authenticated and (current_user.role == 'moder' or current_user.role == 'admin') and item.id != current_user.id %}
             <td>
-                <a href="/post_bid/{{ item.id }}" class="btn btn-warning">
-                    Добавить
+                {% if item.banned %}
+                <a href="/unban_user/{{ item.id }}" class="btn btn-danger">
+                    Разбанить
                 </a>
-                <a href="/delete_bid/{{ item.id }}" class="btn btn-danger">
-                    Удалить
+                {% else %}
+                <a href="/ban_user/{{ item.id }}" class="btn btn-danger">
+                    Забанить
                 </a>
+                {% endif %}
+                {% if current_user.id == 1 and item.banned == False%}
+                {% if item.role == 'user' %}
+                    <a href="/moder_user/{{ item.id }}" class="btn btn-success">
+                        Сделать модератором
+                    </a>
+                {% elif item.role == 'moder' %}
+                    <a href="/unmoder_user/{{ item.id }}" class="btn btn-warning">
+                        Убрать из модераторов
+                    </a>
+                {% endif %}
+                {% endif %}
+
             </td>
             {% endif %}
     </table>

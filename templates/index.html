@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block right %}
-<h4>Есть идея создать сайт с анекдотами, можно регистрироваться, чтобы ставить лайки, тех кто много дизлайкает, их аккаунт блокируется а почта добавляется в чёрный список</h4>
+
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
             <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
         </tr>
         <tr><td>Рейтинг: {{item.rating}}</td></tr>
-        {% if current_user.is_authenticated and (current_user == item.user or current_user.id == 1) %}
+        {% if current_user.is_authenticated and (current_user == item.user or current_user.role == 'admin' or current_user.role == 'moder') %}
             <td>
                 <a href="/edit_anecdote/{{ item.id }}" class="btn btn-warning">
                     Изменить

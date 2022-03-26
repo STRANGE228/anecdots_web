@@ -13,10 +13,12 @@
         <ul class="nav">
             <il class="nav-item"><a class="nav-link active" href="/index">Главная</a></il>
             {% if current_user.is_authenticated %}
+            {% if current_user.banned == False %}
             <il class="nav-item"><a class="nav-link active" href="/add_anecdote">Добавить анекдот</a></il>
+            {% endif %}
             {% if current_user.id == 1 %}
             <il class="nav-item"><a class="nav-link active" href="/moder_bid">На рассмотрении</a></il>
-            <il class="nav-item"><a class="nav-link disabled" href="/users">Пользователи</a></il>
+            <il class="nav-item"><a class="nav-link active" href="/users">Пользователи</a></il>
             <il class="nav-item"><a class="nav-link disabled" href="#5">Меню 5</a></il>
             {% endif %}
             {% endif %}

@@ -17,6 +17,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     rating = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     dislikes = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     role = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    banned = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True, default=False)
 
     anecdots = orm.relation("Anecdote", back_populates='user')
 

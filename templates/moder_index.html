@@ -6,9 +6,9 @@
 
 {% block content %}
 
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Анекдоты</h2>
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Рассмотрение анекдотов</h2>
 <div class="container-fluid">
-    {% for item in anecdots%}
+    {% for item in anecdots %}
     <table class="table table-bordered">
         <tr>
             <td>{{item.anecdote}}</td>
@@ -17,10 +17,13 @@
             <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
         </tr>
         <tr><td>Рейтинг: {{item.rating}}</td></tr>
-        {% if current_user.is_authenticated and (current_user == item.user or current_user.id == 1) %}
+        {% if current_user.is_authenticated and (current_user.role == 'moder' or current_user.role == 'admin') %}
             <td>
-                <a href="/post_bid/{{ item.id }}" class="btn btn-warning">
+                <a href="/post_bid/{{ item.id }}" class="btn btn-success">
                     Добавить
+                </a>
+                <a href="/edit_bid/{{ item.id }}" class="btn btn-warning">
+                    Редактировать
                 </a>
                 <a href="/delete_bid/{{ item.id }}" class="btn btn-danger">
                     Удалить
