@@ -6,12 +6,16 @@
 
 {% block content %}
 
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Пользователи</h2>
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">Пользователи</h2>
+<form>
+  <input type="search" name="text">
+  <input type="submit" value="Найти">
+</form>
 <div class="container-fluid">
     {% for item in users%}
     <table class="table table-bordered">
         <tr>
-            <td>{{item.nickname}}</td>
+            <td><h5>{{item.nickname}}</h5></td>
         </tr>
         <tr>
             <td><a>email - {{item.email}}</a><a>&emsp;&emsp;&emsp;&emsp;рейтинг - {{item.rating}}</a>
@@ -53,6 +57,17 @@
     </table>
     {% endfor %}
     <div></div>
+    <div align="center">
+    <ul class="danuas voduv-peksaucub" >
+        {% for i in pages %}
+        {% if i == current + 1 %}
+            <li><a class="nav-link disabled" href="/users/{{ i-1 }}">{{ i }}</a></li>
+        {% else %}
+            <li><a class="nav-link active" href="/users/{{ i-1 }}">{{ i }}</a></li>
+        {% endif %}
+        {%endfor %}
+</ul><br>
+</div>
 </div>
 
 

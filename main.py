@@ -93,28 +93,50 @@ def reqister():
 
 
 @app.route('/moder_bid', methods=['GET'])
+@app.route('/moder_bid/<int:num>', methods=['GET'])
 @login_required
-def moder_bid():
+def moder_bid(num=0):
     if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     moder_anecdots = g.db_sess.query(Bid)
-    return render_template("moder_index.html", anecdots=moder_anecdots)
+    count = moder_anecdots.count()
+    lenght = count // 3 + (1 if count % 3 else 0)
+    if lenght <= 7:
+        pages = range(1, lenght + 1)
+    else:
+        pages = [1]
+        pages += [num - 2, num - 1, num, num + 1, num + 2]
+        pages += [lenght]
+    return render_template("moder_index.html", anecdots=moder_anecdots[num * 3:(num + 1) * 3], current=num, pages=pages)
 
 
 @app.route('/users', methods=['GET'])
+@app.route('/users/<int:num>', methods=['GET'])
 @login_required
-def users():
+def users(num=0):
+    name = request.query_string.decode('utf-8')[5:]
     if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
-    users = g.db_sess.query(User)
-    return render_template("users.html", users=users)
+        return redirect('/index')
+    if name:
+        users = g.db_sess.query(User).filter(User.nickname.like(f'%{name}%'))
+    else:
+        users = g.db_sess.query(User)
+    count = users.count()
+    lenght = count // 3 + (1 if count % 3 else 0)
+    if lenght <= 7:
+        pages = range(1, lenght + 1)
+    else:
+        pages = [1]
+        pages += [num - 2, num - 1, num, num + 1, num + 2]
+        pages += [lenght]
+    return render_template("users.html", users=users[num * 3:(num + 1) * 3], current=num, pages=pages)
 
 
 @app.route('/post_bid/<int:id_bid>', methods=['GET', 'POST'])
 @login_required
 def post_bid(id_bid):
     if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     bid = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
     anecdote = Anecdote()
     anecdote.anecdote = bid.anecdote
@@ -131,7 +153,7 @@ def post_bid(id_bid):
 @login_required
 def edit_bid(id_bid):
     if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     form = AddAnecdote()
     if request.method == "GET":
         anecdote = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
@@ -154,7 +176,7 @@ def edit_bid(id_bid):
 @login_required
 def delete_bid(id_bid):
     if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     bid = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
     g.db_sess.delete(bid)
     g.db_sess.commit()
@@ -165,9 +187,9 @@ def delete_bid(id_bid):
 @login_required
 def add_anecdote():
     form = AddAnecdote()
+    if current_user.banned == 1:
+        return redirect('/index')
     if form.validate_on_submit():
-        if current_user.banned is True:
-            return redirect('/index')
         anecdote = Bid()
         anecdote.anecdote = form.anecdote.data
         anecdote.author = current_user.id
@@ -219,7 +241,7 @@ def edit_anecdote(id_anecdote):
 @login_required
 def ban_user(id_user):
     if not (current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     user = g.db_sess.query(User).filter(User.id == id_user).first()
     user.banned = True
     if user.role == 'moder':
@@ -238,7 +260,7 @@ def ban_user(id_user):
 @login_required
 def unban_user(id_user):
     if not (current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     user = g.db_sess.query(User).filter(User.id == id_user).first()
     user.banned = False
     g.db_sess.commit()
@@ -249,7 +271,7 @@ def unban_user(id_user):
 @login_required
 def moder_user(id_user):
     if not (current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     user = g.db_sess.query(User).filter(User.id == id_user).first()
     user.role = 'moder'
     g.db_sess.commit()
@@ -260,7 +282,7 @@ def moder_user(id_user):
 @login_required
 def unmoder_user(id_user):
     if not (current_user.role == 'admin'):
-        return redirect('index')
+        return redirect('/index')
     user = g.db_sess.query(User).filter(User.id == id_user).first()
     user.role = 'user'
     g.db_sess.commit()
@@ -283,9 +305,18 @@ def not_found(error):
 
 
 @app.route("/index", methods=["GET"])
-def index():
+@app.route("/index/<int:num>", methods=["GET"])
+def index(num=0):
     anecdots = g.db_sess.query(Anecdote)
-    return render_template("index.html", anecdots=anecdots)
+    count = anecdots.count()
+    lenght = count // 3 + (1 if count % 3 else 0)
+    if lenght <= 7:
+        pages = range(1, lenght + 1)
+    else:
+        pages = [1]
+        pages += [num - 2, num - 1, num, num + 1, num + 2]
+        pages += [lenght]
+    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages)
 
 
 def get_info_by_ip(ip):

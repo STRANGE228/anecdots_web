@@ -1,6 +1,4 @@
-﻿/* Стили */
-
-h1 {
+﻿h1 {
     color: #ce55d2;
     margin-left: 40px
 }
@@ -15,20 +13,24 @@ h4 {
     text-align: center;
 }
 
+h5 {
+    color: #000000
+}
+
 .right-block {
-    background-color: #9e9e9e;
     height: 100vh;
 }
 
 
 .main-block {
-    background-color: #d6d6e6;
     height: 100vh;
 }
 
 body, html {
     width: 100vw;
     height: 100vh;
+    background: linear-gradient(to right, #ce00d6, #000091);
+
 }
 
 .nav-item {
@@ -38,5 +40,117 @@ body, html {
 
 .table-bordered {
     border: 2px solid #ff9aff;
+}
+
+.like,p{
+  font-family: 'Open Sans';
+}
+
+.like-toggle{
+  outline:none;
+  box-shadow:none;
+  border: none;
+  width: 40px;
+  height: 30px;
+  font-size: 1.3em;
+  border-radius: 100px;
+}
+
+.like-active.basic{
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 1.3em;
+  border-radius: 100px;
+  background: #F26C4F;
+  color: #fff;
+}
+
+* {box-sizing: border-box;}
+form {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+input {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7BA7AB;
+  border-radius: 5px;
+  outline: none;
+  background: #F9F0DA;
+  color: #9E9C9C;
+}
+
+button {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.danuas {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.danuas li {
+  display: inline;
+  text-align: center;
+}
+
+.voduv-peksaucub a.deystvuyus, .voduv-peksaucub a:deystvuyus {
+  border-color: #d8423c;
+  background: #d6423c;
+  color: #f7f3f3;
+}
+
+.danuas a {
+  float: left;
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 5px 12px;
+  color: #fbf8f8;
+  margin-left: -1px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
+
+.voduv-peksaucub li:first-child a {
+  -moz-border-radius: 50px 0 0 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px 0 0 50px;
+}
+
+.voduv-peksaucub li:last-child a {
+  -moz-border-radius: 0 50px 50px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 50px 50px 0;
+}
+
+.voduv-peksaucub a {
+  border-color: #cecece;
+  color: #929191;
+  background: #f7f6f6;
+}
+
+.voduv-peksaucub a:hover {
+  color: #da403a;
+  background-color: #e4e2e2;
+}
+
+.voduv-peksaucub a.deystvuyus, .voduv-peksaucub a:deystvuyus {
+  border-color: #d8423c;
+  background: #d6423c;
+  color: #f7f3f3;
 }
 

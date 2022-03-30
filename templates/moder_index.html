@@ -11,7 +11,7 @@
     {% for item in anecdots %}
     <table class="table table-bordered">
         <tr>
-            <td>{{item.anecdote}}</td>
+            <td><h5>{{item.anecdote}}</h5></td>
         </tr>
         <tr>
             <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
@@ -20,7 +20,7 @@
         {% if current_user.is_authenticated and (current_user.role == 'moder' or current_user.role == 'admin') %}
             <td>
                 <a href="/post_bid/{{ item.id }}" class="btn btn-success">
-                    Добавить
+                    Опубликовать
                 </a>
                 <a href="/edit_bid/{{ item.id }}" class="btn btn-warning">
                     Редактировать
@@ -33,6 +33,17 @@
     </table>
     {% endfor %}
     <div></div>
+        <div align="center">
+    <ul class="danuas voduv-peksaucub" >
+        {% for i in pages %}
+        {% if i == current + 1 %}
+            <li><a class="nav-link disabled" href="/moder_bid/{{ i-1 }}">{{ i }}</a></li>
+        {% else %}
+            <li><a class="nav-link active" href="/moder_bid/{{ i-1 }}">{{ i }}</a></li>
+        {% endif %}
+        {%endfor %}
+</ul><br>
+</div>
 </div>
 
 

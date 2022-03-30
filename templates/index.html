@@ -11,12 +11,14 @@
     {% for item in anecdots%}
     <table class="table table-bordered">
         <tr>
-            <td>{{item.anecdote}}</td>
+            <td><h5>{{item.anecdote}}</h5></td>
         </tr>
         <tr>
             <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
         </tr>
-        <tr><td>Рейтинг: {{item.rating}}</td></tr>
+        <tr><td>Рейтинг: {{item.rating}}&emsp;&emsp;&emsp;
+            <button class='like-toggle basic'>♥</button>
+        </td></tr>
         {% if current_user.is_authenticated and (current_user == item.user or current_user.role == 'admin' or current_user.role == 'moder') %}
             <td>
                 <a href="/edit_anecdote/{{ item.id }}" class="btn btn-warning">
@@ -30,6 +32,17 @@
     </table>
     {% endfor %}
     <div></div>
+    <div align="center">
+    <ul class="danuas voduv-peksaucub" >
+        {% for i in pages %}
+        {% if i == current + 1 %}
+            <li><a class="nav-link disabled" href="/index/{{ i-1 }}">{{ i }}</a></li>
+        {% else %}
+            <li><a class="nav-link active" href="/index/{{ i-1 }}">{{ i }}</a></li>
+        {% endif %}
+        {%endfor %}
+</ul><br>
+</div>
 </div>
 
 
