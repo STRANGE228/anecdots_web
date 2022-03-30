@@ -205,7 +205,7 @@ def add_anecdote():
 @login_required
 def del_anecdote(id_anecdote):
     anecdote = g.db_sess.query(Anecdote).filter(Anecdote.id == id_anecdote).first()
-    user = g.db_sess.query(User).filter(User.id == anecdote.user.id).first()
+    user = g.db_sess.query(User).filter(User.id == anecdote.author).first()
     if not(current_user.id == user.id or current_user.role == 'moder'):
         return redirect('/index')
     user.rating = user.rating - anecdote.rating
@@ -220,7 +220,7 @@ def edit_anecdote(id_anecdote):
     form = AddAnecdote()
     if request.method == "GET":
         anecdote = g.db_sess.query(Anecdote).filter(Anecdote.id == id_anecdote).first()
-        if not (current_user.id == anecdote.user.id or current_user.role == 'moder'):
+        if not (current_user.id == anecdote.author or current_user.role == 'moder'):
             return redirect('/index')
         form.anecdote.data = anecdote.anecdote
     if form.validate_on_submit():
@@ -246,10 +246,10 @@ def ban_user(id_user):
     user.banned = True
     if user.role == 'moder':
         user.role = 'user'
-    anecdots = g.db_sess.query(Anecdote).filter(user.id == id_user).all()
+    anecdots = g.db_sess.query(Anecdote).filter(Anecdote.author == id_user).all()
     for anec in anecdots:
         g.db_sess.delete(anec)
-    bids = g.db_sess.query(Bid).filter(user.id == id_user).all()
+    bids = g.db_sess.query(Bid).filter(Bid.author == id_user).all()
     for bid in bids:
         g.db_sess.delete(bid)
     g.db_sess.commit()

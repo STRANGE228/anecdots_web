@@ -17,7 +17,7 @@
             <td><a>Автор - {{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
         </tr>
         <tr><td>Рейтинг: {{item.rating}}&emsp;&emsp;&emsp;
-            <button class='like-toggle basic'>♥</button>
+<!--            <button class='like-toggle basic'>♥</button>-->
         </td></tr>
         {% if current_user.is_authenticated and (current_user == item.user or current_user.role == 'admin' or current_user.role == 'moder') %}
             <td>
