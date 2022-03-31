@@ -33,6 +33,23 @@ body, html {
 
 }
 
+a {
+  color: black;
+  font-family: helvetica;
+  text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+color: black;
+font-weight: bold;
+}
+a:visited { text-decoration: none; }
+a:active { text-decoration: none; }
+
 .nav-item {
     padding-left: 0px;
     padding-right: 10px;
@@ -40,30 +57,6 @@ body, html {
 
 .table-bordered {
     border: 2px solid #ff9aff;
-}
-
-.like,p{
-  font-family: 'Open Sans';
-}
-
-.like-toggle{
-  outline:none;
-  box-shadow:none;
-  border: none;
-  width: 40px;
-  height: 30px;
-  font-size: 1.3em;
-  border-radius: 100px;
-}
-
-.like-active.basic{
-  border: none;
-  width: 30px;
-  height: 30px;
-  font-size: 1.3em;
-  border-radius: 100px;
-  background: #F26C4F;
-  color: #fff;
 }
 
 * {box-sizing: border-box;}

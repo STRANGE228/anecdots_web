@@ -7,9 +7,11 @@
 <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Регистрация пользователя</h2>
 <div class="row">
     <div class="col-md-4">
+
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <table>
+                <h4>{{ message }}</h4>
                 {% for field in form if field.name not in ['submit', 'csrf_token'] %}
                 <tr>
                     <div class="input-group">

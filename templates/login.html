@@ -8,6 +8,7 @@
 <form action="" method="post">
     <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Вход в систему</h2>
     {{ form.hidden_tag() }}
+    <h4>{{ message }}</h4>
     {%  for field in form if field.name not in ['submit', 'csrf_token'] %}
 
     <p>

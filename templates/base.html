@@ -16,14 +16,14 @@
             {% if current_user.banned == False %}
             <il class="nav-item"><a class="nav-link active" href="/add_anecdote">Добавить анекдот</a></il>
             {% endif %}
-            {% if current_user.id == 1 %}
-            <il class="nav-item"><a class="nav-link active" href="/moder_bid">На рассмотрении</a></il>
             <il class="nav-item"><a class="nav-link active" href="/users">Пользователи</a></il>
-            <il class="nav-item"><a class="nav-link disabled" href="#5">Меню 5</a></il>
+            <il class="nav-item"><a class="nav-link active" href="/user/{{ current_user.id }}">Мои анекдоты</a></il>
+            {% if current_user.role == 'moder' or current_user.role == 'admin' %}
+            <il class="nav-item"><a class="nav-link active" href="/moder_bid">На рассмотрении</a></il>
             {% endif %}
             {% endif %}
             {% if current_user.is_authenticated %}
-            <a class="nav-item" style="padding-right: 40px" href="/logout">[ {{ current_user.nickname }} ]</a>
+            <a class="nav-item" style="padding-right: 40px color:blue!important; font-size:20px"  href="/logout">[ {{ current_user.nickname }} ]</a>
             {% else %}
             <div>
                 <a class="btn btn-primary " href="/register">Зарегистрироваться</a>

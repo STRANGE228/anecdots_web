@@ -107,7 +107,7 @@ def moder_bid(num=0):
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("moder_index.html", anecdots=moder_anecdots[num * 3:(num + 1) * 3], current=num, pages=pages)
+    return render_template("moder_index.html", anecdots=moder_anecdots[num * 3:(num + 1) * 3], current=num, pages=pages, count=lenght)
 
 
 @app.route('/users', methods=['GET'])
@@ -115,8 +115,6 @@ def moder_bid(num=0):
 @login_required
 def users(num=0):
     name = request.query_string.decode('utf-8')[5:]
-    if not(current_user.role == 'moder' or current_user.role == 'admin'):
-        return redirect('/index')
     if name:
         users = g.db_sess.query(User).filter(User.nickname.like(f'%{name}%'))
     else:
@@ -129,7 +127,7 @@ def users(num=0):
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("users.html", users=users[num * 3:(num + 1) * 3], current=num, pages=pages)
+    return render_template("users.html", users=users[num * 3:(num + 1) * 3], current=num, pages=pages, count=lenght)
 
 
 @app.route('/post_bid/<int:id_bid>', methods=['GET', 'POST'])
@@ -316,7 +314,22 @@ def index(num=0):
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages)
+    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages, count=lenght)
+
+
+@app.route("/user/<int:id>", methods=["GET"])
+@app.route("/user/<int:id>/<int:num>", methods=["GET"])
+def user(id, num=0):
+    anecdots = g.db_sess.query(Anecdote).filter(Anecdote.author == id)
+    count = anecdots.count()
+    lenght = count // 3 + (1 if count % 3 else 0)
+    if lenght <= 7:
+        pages = range(1, lenght + 1)
+    else:
+        pages = [1]
+        pages += [num - 2, num - 1, num, num + 1, num + 2]
+        pages += [lenght]
+    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages, count=lenght)
 
 
 def get_info_by_ip(ip):
