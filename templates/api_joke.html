@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block right %}
+
+<div class="sidenav">
+  <a href="/other_jokes">Рандомная шутка</a>
+  <a href="/other_anecdotes">Рандомный анекдот</a>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Рандомные шутки</h2>
+<h4 style="color: #dd0000;">Внимание! Данные анекдоты не фильтруются и не модерируются модераторами этого сайта.</h4>
+<div>
+    <h1 style="color: #000000;">{{ joke }}</h1>
+</div>
+<div align="center">
+    <a href="/other_jokes">ещё</a>
+</div>
+
+
+
+
+
+{% endblock %}

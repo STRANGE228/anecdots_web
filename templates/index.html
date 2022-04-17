@@ -2,11 +2,16 @@
 
 {% block right %}
 
+<div class="sidenav">
+  <a href="/other_jokes">Рандомная шутка</a>
+  <a href="/other_anecdotes">Рандомный анекдот</a>
+</div>
+
 {% endblock %}
 
 {% block content %}
 
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Анекдоты</h2>
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Анекдоты</h2>
 <div class="container-fluid">
     {% for item in anecdots%}
     <table class="table table-bordered">
@@ -14,42 +19,45 @@
             <td><h5>{{item.anecdote}}</h5></td>
         </tr>
         <tr>
-            <td><a>Автор - </a><a href="/user/{{ item.author }}">{{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата написания - {{item.date}}</a></td>
+            <td><a>Автор - </a><a href="/user/{{ item.author }}">{{item.user.nickname}}</a><a>&emsp;&emsp;&emsp;&emsp;дата
+                написания - {{item.date}}</a></td>
         </tr>
-        {% if current_user.is_authenticated and (current_user == item.user or current_user.role == 'admin' or current_user.role == 'moder') %}
-            <td>
-                <a href="/edit_anecdote/{{ item.id }}" class="btn btn-warning">
-                    Изменить
-                </a>
-                <a href="/delete_anecdote/{{ item.id }}" class="btn btn-danger">
-                    Удалить
-                </a>
-            </td>
-            {% endif %}
+        {% if current_user.is_authenticated and (current_user == item.user or current_user.role == 'admin' or
+        current_user.role == 'moder') %}
+        <td>
+            <a href="/edit_anecdote/{{ item.id }}" class="btn btn-warning">
+                Изменить
+            </a>
+            <a href="/delete_anecdote/{{ item.id }}" class="btn btn-danger">
+                Удалить
+            </a>
+        </td>
+        {% endif %}
     </table>
     {% endfor %}
     <div></div>
     <div align="center">
-    <ul class="danuas voduv-peksaucub" >
-        {% if current > 0 %}
-        <li><a class="nav-link active" href="/index/{{ current-1 }}">«</a></li>
-        {% else %}
-        <li><a class="nav-link disabled" href="/index/{{ current-1 }}">«</a></li>
-        {% endif %}
-        {% for i in pages %}
-        {% if i == current + 1 %}
+        <ul class="danuas voduv-peksaucub">
+            {% if current > 0 %}
+            <li><a class="nav-link active" href="/index/{{ current-1 }}">«</a></li>
+            {% else %}
+            <li><a class="nav-link disabled" href="/index/{{ current-1 }}">«</a></li>
+            {% endif %}
+            {% for i in pages %}
+            {% if i == current + 1 %}
             <li><a class="nav-link disabled" href="/index/{{ i-1 }}">{{ i }}</a></li>
-        {% else %}
+            {% else %}
             <li><a class="nav-link active" href="/index/{{ i-1 }}">{{ i }}</a></li>
-        {% endif %}
-        {%endfor %}
-        {% if current < count - 1 %}
-        <li><a class="nav-link active" href="/index/{{ current+1 }}">»</a></li>
-        {% else %}
-        <li><a class="nav-link disabled" href="/index/{{ current+1 }}">»</a></li>
-        {% endif %}
-</ul><br>
-</div>
+            {% endif %}
+            {%endfor %}
+            {% if current < count - 1 %}
+            <li><a class="nav-link active" href="/index/{{ current+1 }}">»</a></li>
+            {% else %}
+            <li><a class="nav-link disabled" href="/index/{{ current+1 }}">»</a></li>
+            {% endif %}
+        </ul>
+        <br>
+    </div>
 </div>
 
 

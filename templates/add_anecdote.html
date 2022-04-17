@@ -7,7 +7,7 @@
 {% block content %}
 
 <form action="" method="post">
-    <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Добавление анекдота</h2>
+    <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Добавление анекдота</h2>
     {{ form.hidden_tag() }}
     <table>
         {% for field in form if field.name not in ['submit', 'csrf_token'] %}

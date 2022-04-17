@@ -23,7 +23,8 @@
             {% endif %}
             {% endif %}
             {% if current_user.is_authenticated %}
-            <a class="nav-item" style="padding-right: 40px color:blue!important; font-size:20px"  href="/logout">[ {{ current_user.nickname }} ]</a>
+            <a class="nav-item" style="padding-right: 40px color:blue!important; font-size:20px" href="/logout">[ {{
+                current_user.nickname }} ]</a>
             {% else %}
             <div>
                 <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
@@ -38,8 +39,8 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 main-block">{% block content %}  {% endblock %}</div>
-        <div class="col-md-2 left-block">{% block right %}  {% endblock %}</div>
+        <div class="col-md-10 main-block">{% block content %} {% endblock %}</div>
+        <div class="col-md-2 left-block">{% block right %} {% endblock %}</div>
     </div>
 </div>
 
