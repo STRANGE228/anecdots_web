@@ -25,7 +25,7 @@ api = Api(app, catch_all_404s=True)
 
 def main():
     db_session.global_init("db/main_base.db")
-    app.run(debug=True)
+    app.run(host='localhost', port=4040, debug=True)
 
 
 @app.before_request
@@ -100,14 +100,14 @@ def moder_bid(num=0):
         return redirect('/index')
     moder_anecdots = g.db_sess.query(Bid)
     count = moder_anecdots.count()
-    lenght = count // 3 + (1 if count % 3 else 0)
+    lenght = count // 5 + (1 if count % 5 else 0)
     if lenght <= 7:
         pages = range(1, lenght + 1)
     else:
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("moder_index.html", anecdots=moder_anecdots[num * 3:(num + 1) * 3], current=num, pages=pages,
+    return render_template("moder_index.html", anecdots=moder_anecdots[num * 5:(num + 1) * 5], current=num, pages=pages,
                            count=lenght)
 
 
@@ -116,19 +116,21 @@ def moder_bid(num=0):
 @login_required
 def users(num=0):
     name = request.query_string.decode('utf-8')[5:]
+    print(name)
     if name:
         users = g.db_sess.query(User).filter(User.nickname.like(f'%{name}%'))
     else:
         users = g.db_sess.query(User)
     count = users.count()
-    lenght = count // 3 + (1 if count % 3 else 0)
+    lenght = count // 5 + (1 if count % 5 else 0)
     if lenght <= 7:
         pages = range(1, lenght + 1)
     else:
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("users.html", users=users[num * 3:(num + 1) * 3], current=num, pages=pages, count=lenght)
+    return render_template("users.html", users=users[num * 5:(num + 1) * 5], current=num, pages=pages, count=lenght,
+                           name=name)
 
 
 @app.route('/post_bid/<int:id_bid>', methods=['GET', 'POST'])
@@ -158,14 +160,8 @@ def edit_bid(id_bid):
         anecdote = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
         form.anecdote.data = anecdote.anecdote
     if form.validate_on_submit():
-        anecdote = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
-        bid = Bid()
+        bid = g.db_sess.query(Bid).filter(Bid.id == id_bid).first()
         bid.anecdote = form.anecdote.data
-        bid.date = anecdote.date
-        bid.author = anecdote.author
-        bid.rating = 0
-        g.db_sess.delete(anecdote)
-        g.db_sess.add(bid)
         g.db_sess.commit()
         return redirect('/moder_bid')
     return render_template('add_anecdote.html', form=form)
@@ -308,14 +304,14 @@ def not_found(error):
 def index(num=0):
     anecdots = g.db_sess.query(Anecdote)
     count = anecdots.count()
-    lenght = count // 3 + (1 if count % 3 else 0)
+    lenght = count // 5 + (1 if count % 5 else 0)
     if lenght <= 7:
         pages = range(1, lenght + 1)
     else:
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages,
+    return render_template("index.html", anecdots=anecdots[::-1][num * 5:(num + 1) * 5], current=num, pages=pages,
                            count=lenght)
 
 
@@ -324,25 +320,25 @@ def index(num=0):
 def user(id, num=0):
     anecdots = g.db_sess.query(Anecdote).filter(Anecdote.author == id)
     count = anecdots.count()
-    lenght = count // 3 + (1 if count % 3 else 0)
+    lenght = count // 5 + (1 if count % 5 else 0)
     if lenght <= 7:
         pages = range(1, lenght + 1)
     else:
         pages = [1]
         pages += [num - 2, num - 1, num, num + 1, num + 2]
         pages += [lenght]
-    return render_template("index.html", anecdots=anecdots[num * 3:(num + 1) * 3], current=num, pages=pages,
-                           count=lenght)
+    author = g.db_sess.query(User).filter(User.id == id).first()
+    return render_template("user_anecdots.html", anecdots=anecdots[::-1][num * 5:(num + 1) * 5], current=num,
+                           pages=pages,
+                           count=lenght, author=author)
 
 
 @app.route("/other_anecdotes", methods=["GET"])
-@login_required
 def api_anecdots(num=0):
     return render_template("api_anecdote.html")
 
 
 @app.route("/other_jokes", methods=["GET"])
-@login_required
 def get_joke():
     url = "https://geek-jokes.sameerkumar.website/api?format=json"
     joke = requests.get(url).json()['joke']
@@ -352,7 +348,8 @@ def get_joke():
         'x-rapidapi-key': "739924f2damsh45d96f6e1329ab9p1f3f5cjsn3faf86a331c1",
         'x-rapidapi-host': "translated-mymemory---translation-memory.p.rapidapi.com"
     }
-    translated_joke = requests.request("GET", url, headers=headers, params=querystring).json()["responseData"]["translatedText"]
+    translated_joke = requests.request("GET", url, headers=headers, params=querystring).json()["responseData"][
+        "translatedText"]
     return render_template("api_joke.html", joke=translated_joke)
 
 

@@ -4,10 +4,9 @@
 {% endblock %}
 
 {% block content %}
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" >Регистрация пользователя</h2>
-<div class="row">
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Регистрация пользователя</h2>
+<div align="center">
     <div class="col-md-4">
-
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <table>
@@ -16,7 +15,7 @@
                 <tr>
                     <div class="input-group">
                         <td class="label-info">{{ field.label }}</td>
-                        <td class="input" style="padding: 5px">{{ field() }}</td>
+                        <td class="input" style="padding: 5px">{{ field(class="form-control form-control-lg") }}</td>
                         <td>
                             {% for error in field.errors %}
                             <div class="alert alert-danger" role="alert">
@@ -29,7 +28,7 @@
 
                 {% endfor %}
             </table>
-            <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            <p>{{ form.submit(type="submit", class="btn btn-success") }}</p>
 
         </form>
     </div>

@@ -6,26 +6,30 @@
 
 {% block content %}
 
-<form action="" method="post">
-    <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Добавление анекдота</h2>
-    {{ form.hidden_tag() }}
-    <table>
-        {% for field in form if field.name not in ['submit', 'csrf_token'] %}
-        <tr>
+<div align="center">
+    <form action="" method="post">
+        <div>
+            <h2 xmlns:border="http://www.w3.org/1999/xhtml">Добавление анекдота</h2>
+        </div>
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.name not in ['submit', 'csrf_token'] %}
+            <tr align="right">
 
-            <td style="padding: 5px">{{ field.label }}</td>
-            <td style="padding: 5px">{{ field() }}</td>
-            <td style="padding: 5px">{% for error in field.errors %}
-                <p class="alert alert-danger" role="alert">
-                    {{ error }}
-                </p>
-                {% endfor %}
-            </td>
+                <td style="padding: 5px"><h4>{{ field.label }}</h4></td>
+                <td align="right" style="padding: 5px">{{ field() }}</td>
+                <td style="padding: 5px">{% for error in field.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                </td>
 
-        </tr>
-        {% endfor %}
-    </table>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            </tr>
+            {% endfor %}
+        </table>
+        <p>{{ form.submit(type="submit", class="btn btn-primary", style="height:50px;width:400px") }}</p>
 
-</form>
+    </form>
+</div>
 {% endblock %}

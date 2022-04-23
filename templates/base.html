@@ -9,21 +9,23 @@
     <title>{{ title }}</title>
 
     <div class="navbar bg-dark">
-        <div class="navbar-brand"><h1>Анекдоты выхвыфвыхзафывхыфаыфзафызфъы</h1></div>
+        <div class="navbar-brand"><h1>Анекдоты ыхвыфвыхзахпахпвхпхва</h1></div>
         <ul class="nav">
-            <il class="nav-item"><a class="nav-link active" href="/index/0">Главная</a></il>
+            <il class="a_link1 nav-item "><a class="a_link1 nav-link active" href="/index/0">Главная</a></il>
             {% if current_user.is_authenticated %}
             {% if current_user.banned == False %}
-            <il class="nav-item"><a class="nav-link active" href="/add_anecdote">Добавить анекдот</a></il>
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/add_anecdote">Добавить анекдот</a>
+            </il>
             {% endif %}
-            <il class="nav-item"><a class="nav-link active" href="/users">Пользователи</a></il>
-            <il class="nav-item"><a class="nav-link active" href="/user/{{ current_user.id }}">Мои анекдоты</a></il>
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/users">Пользователи</a></il>
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/user/{{ current_user.id }}">Мои
+                анекдоты</a></il>
             {% if current_user.role == 'moder' or current_user.role == 'admin' %}
-            <il class="nav-item"><a class="nav-link active" href="/moder_bid">На рассмотрении</a></il>
+            <il class="a_link1 nav-item"><a class="a_link1 nav-link active" href="/moder_bid">На рассмотрении</a></il>
             {% endif %}
             {% endif %}
             {% if current_user.is_authenticated %}
-            <a class="nav-item" style="padding-right: 40px color:blue!important; font-size:20px" href="/logout">[ {{
+            <a class="a_link1 nav-item text-warning" style="margin-right: 30px; font-size:20px" href="/logout">[ {{
                 current_user.nickname }} ]</a>
             {% else %}
             <div>
@@ -40,7 +42,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 main-block">{% block content %} {% endblock %}</div>
-        <div class="col-md-2 left-block">{% block right %} {% endblock %}</div>
+        <div class="col-md-2 left-block" style="margin-top: 10px;">{% block right %} {% endblock %}</div>
     </div>
 </div>
 

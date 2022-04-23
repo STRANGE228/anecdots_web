@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Анекдоты</h2>
+<h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Анекдоты от {{author.nickname}}</h2>
 <div class="container-fluid">
     {% for item in anecdots%}
     <table class="table table-bordered">
@@ -39,21 +39,21 @@
     <div align="center">
         <ul class="danuas voduv-peksaucub">
             {% if current > 0 %}
-            <li><a class="nav-link active" href="/index/{{ current-1 }}">«</a></li>
+            <li><a class="nav-link active" href="/user/{{author.id}}/{{ current-1 }}">«</a></li>
             {% else %}
-            <li><a class="nav-link disabled" href="/index/{{ current-1 }}">«</a></li>
+            <li><a class="nav-link disabled" href="/user/{{author.id}}/{{ current-1 }}">«</a></li>
             {% endif %}
             {% for i in pages %}
             {% if i == current + 1 %}
-            <li><a class="nav-link disabled" href="/index/{{ i-1 }}">{{ i }}</a></li>
+            <li><a class="nav-link disabled" href="/user/{{author.id}}/{{ i-1 }}">{{ i }}</a></li>
             {% else %}
-            <li><a class="nav-link active" href="/index/{{ i-1 }}">{{ i }}</a></li>
+            <li><a class="nav-link active" href="/user/{{author.id}}/{{ i-1 }}">{{ i }}</a></li>
             {% endif %}
             {%endfor %}
             {% if current < count - 1 %}
-            <li><a class="nav-link active" href="/index/{{ current+1 }}">»</a></li>
+            <li><a class="nav-link active" href="/user/{{author.id}}/{{ current+1 }}">»</a></li>
             {% else %}
-            <li><a class="nav-link disabled" href="/index/{{ current+1 }}">»</a></li>
+            <li><a class="nav-link disabled" href="/user/{{author.id}}/{{ current+1 }}">»</a></li>
             {% endif %}
         </ul>
         <br>

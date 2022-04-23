@@ -1,4 +1,6 @@
-﻿h1 {
+﻿
+
+h1 {
     color: #ce55d2;
     margin-left: 40px
 }
@@ -19,6 +21,7 @@ h5 {
 
 .right-block {
     height: 100vh;
+
 }
 
 
@@ -29,7 +32,7 @@ h5 {
 body, html {
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to right, #ce00d6, #000091);
+    background: linear-gradient(to right, #8A2BE2, #000091);
 
 }
 
@@ -38,15 +41,32 @@ a {
   font-family: helvetica;
   text-decoration: none;
 }
+.a_link a{
+    font-family: helvetica;
+    color: black;
+}
 
-a:link {
-    text-decoration: none;
+.a_link:hover{
+    font-family: helvetica;
+    font-weight: bold;
+    color: black;
 }
-a:hover {
-text-decoration: underline;
-color: black;
-font-weight: bold;
+
+.a_link1 a{
+    font-family: helvetica;
+    color: #666fff;
+    font-size: 17px;
+
 }
+
+.a_link1:hover{
+    font-family: helvetica;
+    font-weight: bold;
+    color: #666fff;
+    font-size: 20px;
+}
+
+
 a:visited { text-decoration: none; }
 a:active { text-decoration: none; }
 
@@ -56,24 +76,22 @@ a:active { text-decoration: none; }
 }
 
 .table-bordered {
-    border: 2px solid #ff9aff;
+    border: 2px solid #E6E6FA;
 }
 
 * {box-sizing: border-box;}
 form {
-  position: relative;
   width: 300px;
-  margin: 0 auto;
 }
 input {
   width: 100%;
   height: 42px;
   padding-left: 10px;
-  border: 2px solid #7BA7AB;
+  border: 2px solid #7B00AB;
   border-radius: 5px;
   outline: none;
   background: #F9F0DA;
-  color: #9E9C9C;
+  color: #000000;
 }
 
 button {
@@ -119,14 +137,10 @@ button {
 }
 
 .voduv-peksaucub li:first-child a {
-  -moz-border-radius: 50px 0 0 50px;
-  -webkit-border-radius: 50px;
   border-radius: 50px 0 0 50px;
 }
 
 .voduv-peksaucub li:last-child a {
-  -moz-border-radius: 0 50px 50px 0;
-  -webkit-border-radius: 0;
   border-radius: 0 50px 50px 0;
 }
 
@@ -148,24 +162,29 @@ button {
 }
 
 .sidenav {
-    height: 100%;
-    width: 100%;
-
-    background-color: #111;
+    height: 90%;
+    width: 95%;
+    background-color: #111111;
     overflow-x: hidden;
+    border: 2px solid #7B00AB;
+    border-radius: 20px;
+    outline: none;
+    background: #111111;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
     padding-top: 20px;
 }
 
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 22px;
+    color: #aaaaaa;
     display: block;
 }
 
 .sidenav a:hover {
     color: #f1f1f1;
+    font-weight: bold;
 }
-
-

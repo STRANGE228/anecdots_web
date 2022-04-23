@@ -3,8 +3,8 @@
 {% block right %}
 
 <div class="sidenav">
-  <a href="/other_jokes">Рандомная шутка</a>
-  <a href="/other_anecdotes">Рандомный анекдот</a>
+    <a href="/other_jokes">Рандомная шутка</a>
+    <a href="/other_anecdotes">Рандомный анекдот</a>
 </div>
 
 {% endblock %}
@@ -12,15 +12,18 @@
 {% block content %}
 
 <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">Пользователи</h2>
-<form>
-    <input type="search" name="text">
-    <input type="submit" value="Найти">
-</form>
+<div align="center">
+    <form>
+        <input type="search" name="text">
+        <input type="submit" value="Найти">
+    </form>
+</div>
 <div class="container-fluid">
     {% for item in users%}
     <table class="table table-bordered">
         <tr>
-            <td><a href="/user/{{ item.id }}" style="font-size:20px; font-weight:bolder;">{{item.nickname}}</a></td>
+            <td><a class="a_link" href="/user/{{ item.id }}" style="font-size:20px; font-weight:bolder;">{{item.nickname}}</a>
+            </td>
         </tr>
         <tr>
             <td>
@@ -72,21 +75,21 @@
     <div align="center">
         <ul class="danuas voduv-peksaucub">
             {% if current > 0 %}
-            <li><a class="nav-link active" href="/index/{{ current-1 }}">«</a></li>
+            <li><a class="nav-link active" href="/users/{{ current-1 }}?text={{name}}">«</a></li>
             {% else %}
-            <li><a class="nav-link disabled" href="/index/{{ current-1 }}">«</a></li>
+            <li><a class="nav-link disabled" href="/users/{{ current-1 }}?text={{name}}">«</a></li>
             {% endif %}
             {% for i in pages %}
             {% if i == current + 1 %}
-            <li><a class="nav-link disabled" href="/index/{{ i-1 }}">{{ i }}</a></li>
+            <li><a class="nav-link disabled" href="/users/{{ i-1 }}?text={{name}}">{{ i }}</a></li>
             {% else %}
-            <li><a class="nav-link active" href="/index/{{ i-1 }}">{{ i }}</a></li>
+            <li><a class="nav-link active" href="/users/{{ i-1 }}?text={{name}}">{{ i }}</a></li>
             {% endif %}
             {%endfor %}
             {% if current < count - 1 %}
-            <li><a class="nav-link active" href="/index/{{ current+1 }}">»</a></li>
+            <li><a class="nav-link active" href="/users/{{ current+1 }}?text={{name}}">»</a></li>
             {% else %}
-            <li><a class="nav-link disabled" href="/index/{{ current+1 }}">»</a></li>
+            <li><a class="nav-link disabled" href="/users/{{ current+1 }}?text={{name}}">»</a></li>
             {% endif %}
         </ul>
         <br>

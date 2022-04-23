@@ -4,25 +4,26 @@
 {% endblock %}
 
 {% block content %}
+<div align="center">
+    <form align="center" action="" method="post">
+        <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Вход в систему</h2>
+        {{ form.hidden_tag() }}
+        <h4>{{ message }}</h4>
+        {% for field in form if field.name not in ['submit', 'csrf_token'] %}
 
-<form action="" method="post">
-    <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Вход в систему</h2>
-    {{ form.hidden_tag() }}
-    <h4>{{ message }}</h4>
-    {% for field in form if field.name not in ['submit', 'csrf_token'] %}
+        <p>
+            {{ field.label }}
+            {{ field(class="form-control form-control-lg") }}
+            {% for error in field.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+        </p>
 
-    <p>
-        {{ field.label }}
-        {{ field(class="form-control") }}
-        {% for error in field.errors %}
-    <p class="alert alert-danger" role="alert">
-        {{ error }}
-    </p>
-    {% endfor %}
-    </p>
+        {% endfor %}
+        <p>{{ form.submit(type="submit", class="btn btn-success") }}</p>
 
-    {% endfor %}
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-
-</form>
+    </form>
+</div>
 {% endblock %}
