@@ -1,4 +1,4 @@
-﻿
+
 
 h1 {
     color: #ce55d2;
@@ -32,7 +32,7 @@ h5 {
 body, html {
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to right, #8A2BE2, #000091);
+    background: linear-gradient(to right,#777fff, #666fff);
 
 }
 
@@ -54,7 +54,7 @@ a {
 
 .a_link1 a{
     font-family: helvetica;
-    color: #f666ff;
+    color: #666fff;
     font-size: 17px;
 
 }
@@ -62,7 +62,7 @@ a {
 .a_link1:hover{
     font-family: helvetica;
     font-weight: bold;
-    color: #666fff;
+    color: #f666ff;
     font-size: 20px;
 }
 
