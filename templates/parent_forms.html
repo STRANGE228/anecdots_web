@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
             {% else %}
             <div>
                 <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
-                <a class="btn btn-success" style="margin-right: 40px" href="/login">Войти</a>
+                <a class="btn btn-success" style="margin-right: 40px;" href="/login">Войти</a>
             </div>
             {% endif %}
         </ul>
@@ -41,8 +41,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 left-block">{% block right %} {% endblock %}</div>
-        <div class="col-md-10 main-block">{% block content %} {% endblock %}</div>
+        <div class="col-md-12 main-block">{% block content %} {% endblock %}</div>
     </div>
 </div>
 

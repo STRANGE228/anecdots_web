@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "parent_forms.html" %}
 
 {% block right %}
 {% endblock %}
@@ -7,7 +7,7 @@
 <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Регистрация пользователя</h2>
 <div align="center">
     <div class="col-md-4">
-        <form action="" method="post">
+        <form action="" method="post" style="width: 300px;">
             {{ form.hidden_tag() }}
             <table>
                 <h4>{{ message }}</h4>

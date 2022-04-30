@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "parent_forms.html" %}
 
 {% block right %}
 {% endblock %}
 
 {% block content %}
 <div align="center">
-    <form align="center" action="" method="post">
+    <form align="center" action="" method="post" style="width: 300px;">
         <h2 align="center" xmlns:border="http://www.w3.org/1999/xhtml">Вход в систему</h2>
         {{ form.hidden_tag() }}
         <h4>{{ message }}</h4>

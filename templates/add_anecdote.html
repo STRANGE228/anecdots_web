@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "parent_forms.html" %}
 
 {% block right %}
 
@@ -8,17 +8,15 @@
 
 <div align="center">
     <form action="" method="post">
-        <div>
-            <h2 xmlns:border="http://www.w3.org/1999/xhtml">Добавление анекдота</h2>
-        </div>
+        <h2 xmlns:border="http://www.w3.org/1999/xhtml">Добавление анекдота</h2>
         {{ form.hidden_tag() }}
         <table>
             {% for field in form if field.name not in ['submit', 'csrf_token'] %}
-            <tr align="right">
+            <tr>
 
-                <td style="padding: 5px"><h4>{{ field.label }}</h4></td>
-                <td align="right" style="padding: 5px">{{ field() }}</td>
-                <td style="padding: 5px">{% for error in field.errors %}
+                <td style="padding: 5px;"><h4>{{ field.label }}</h4></td>
+                <td style="padding: 5px;">{{ field() }}</td>
+                <td style="padding: 5px;">{% for error in field.errors %}
                     <p class="alert alert-danger" role="alert">
                         {{ error }}
                     </p>

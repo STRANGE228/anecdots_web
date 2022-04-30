@@ -1,5 +1,7 @@
 import datetime
 import http.client
+
+from pyfiglet import Figlet
 import requests
 from flask import Flask, render_template, redirect, request, make_response, jsonify, g
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -13,6 +15,7 @@ from data.bid import Bid
 from forms.add_anecdote import AddAnecdote
 from forms.login import LoginForm
 from forms.user import RegisterForm
+import cowsay
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key_is_very_secret'
@@ -351,6 +354,21 @@ def get_joke():
     translated_joke = requests.request("GET", url, headers=headers, params=querystring).json()["responseData"][
         "translatedText"]
     return render_template("api_joke.html", joke=translated_joke)
+
+
+@app.route("/easter", methods=["GET"])
+def easter():
+    joke = cowsay.get_output_string('tux', """- По радио сообщили о переходе на зимнее время, сказав, что «этой ночью,
+     ровно в 03:00 нужно перевести стрелку часов на один час назад, на 02:00».
+     - У всех программистов эта ночь зависла в бесконечном цикле.
+     """).replace("'", "`")
+    return render_template("easter.html", easter=joke)
+
+
+@app.route("/thanks", methods=["GET"])
+def thanks():
+    text = Figlet(font='5lineoblique')
+    return render_template("easter.html", easter=text.renderText('Thanks, Yandex Lyceum!'))
 
 
 if __name__ == '__main__':

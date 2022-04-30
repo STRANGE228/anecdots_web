@@ -1,0 +1,183 @@
+﻿h1 {
+    color: #ce55d2;
+    margin-left: 40px
+}
+h2 {
+    color: #000000;
+    text-align: center;
+
+}
+
+h4 {
+    padding-left: 20px;
+    text-align: center;
+}
+
+h5 {
+    color: #000000
+}
+
+.right-block {
+    height: 20vh;
+}
+
+
+.main-block {
+    height: 100vh;
+}
+
+body, html {
+    width: 100vw;
+    height: 150vh;
+    background: linear-gradient(to right, #777fff, #666fff);
+
+}
+
+a {
+  color: black;
+  font-family: helvetica;
+  text-decoration: none;
+}
+.a_link a{
+    font-family: helvetica;
+    color: black;
+}
+
+.a_link:hover{
+    font-family: helvetica;
+    font-weight: bold;
+    color: black;
+}
+
+.a_link1 a{
+    font-family: helvetica;
+    color: #666fff;
+    font-size: 17px;
+
+}
+
+.a_link1:hover{
+    font-family: helvetica;
+    font-weight: bold;
+    color: #f666ff;
+    font-size: 20px;
+}
+
+
+a:visited { text-decoration: none; }
+a:active { text-decoration: none; }
+
+.nav-item {
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.table-bordered {
+    border: 2px solid #E6E6FA;
+}
+
+input {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7B00AB;
+  border-radius: 5px;
+  outline: none;
+  background: #F9F0DA;
+  color: #000000;
+}
+
+button {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.danuas {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.danuas li {
+  display: inline;
+  text-align: center;
+}
+
+.voduv-peksaucub a.deystvuyus, .voduv-peksaucub a:deystvuyus {
+  border-color: #d8423c;
+  background: #d6423c;
+  color: #f7f3f3;
+}
+
+.danuas a {
+  float: left;
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 5px 12px;
+  color: #fbf8f8;
+  margin-left: -1px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
+
+.voduv-peksaucub li:first-child a {
+  border-radius: 50px 0 0 50px;
+}
+
+.voduv-peksaucub li:last-child a {
+  border-radius: 0 50px 50px 0;
+}
+
+.voduv-peksaucub a {
+  border-color: #cecece;
+  color: #929191;
+  background: #f7f6f6;
+}
+
+.voduv-peksaucub a:hover {
+  color: #da403a;
+  background-color: #e4e2e2;
+}
+
+.voduv-peksaucub a.deystvuyus, .voduv-peksaucub a:deystvuyus {
+  border-color: #d8423c;
+  background: #d6423c;
+  color: #f7f3f3;
+}
+
+.sidenav {
+    height: 90%;
+    width: 95%;
+    background-color: #111111;
+    overflow-x: hidden;
+    border: 2px solid #7B00AB;
+    border-radius: 20px;
+    outline: none;
+    background: #111111;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #aaaaaa;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    font-weight: bold;
+}
