@@ -119,7 +119,6 @@ def moder_bid(num=0):
 @login_required
 def users(num=0):
     name = request.query_string.decode('utf-8')[5:]
-    print(name)
     if name:
         users = g.db_sess.query(User).filter(User.nickname.like(f'%{name}%'))
     else:
@@ -369,6 +368,17 @@ def easter():
 def thanks():
     text = Figlet(font='5lineoblique')
     return render_template("easter.html", easter=text.renderText('Thanks, Yandex Lyceum!'))
+
+
+@app.route("/delete_user/<int:id_user>")
+@login_required
+def delete_user(id_user):
+    if not (current_user.role == 'admin'):
+        return redirect('/index')
+    user = g.db_sess.query(User).filter(User.id == id_user).first()
+    g.db_sess.delete(user)
+    g.db_sess.commit()
+    return redirect('/users')
 
 
 if __name__ == '__main__':
