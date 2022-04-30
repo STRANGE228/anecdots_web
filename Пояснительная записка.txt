@@ -13,8 +13,8 @@ users - 28
 add_anecdote - 8
 login - 10
 user - 11
-main - 375
-итого - 500
+main - 385
+итого - 510
 
 css
 style - 190
