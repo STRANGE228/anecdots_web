@@ -13,6 +13,7 @@
                 <h4>{{ message }}</h4>
                 {% for field in form if field.name not in ['submit', 'csrf_token'] %}
                 <tr>
+                    {% if field.name != 'send_code' %}
                     <div class="input-group">
                         <td class="label-info">{{ field.label }}</td>
                         <td class="input" style="padding: 5px">{{ field(class="form-control form-control-lg") }}</td>
@@ -24,6 +25,13 @@
                             {% endfor %}
                         </td>
                     </div>
+                    {% else %}
+                    <div class="input-group">
+                        <td></td>
+                        <td> <input type="submit" value="Отправить код подтверждения" name="send_code" class="btn btn-info"/></td>
+                        <td></td>
+                    </div>
+                    {% endif %}
                 </tr>
 
                 {% endfor %}

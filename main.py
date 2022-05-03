@@ -1,7 +1,9 @@
 import datetime
 import http.client
+import smtplib
+from email.mime.text import MIMEText
+from random import randint
 
-from pyfiglet import Figlet
 import requests
 from flask import Flask, render_template, redirect, request, make_response, jsonify, g
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -15,7 +17,6 @@ from data.bid import Bid
 from forms.add_anecdote import AddAnecdote
 from forms.login import LoginForm
 from forms.user import RegisterForm
-import cowsay
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key_is_very_secret'
@@ -24,6 +25,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 api = Api(app, catch_all_404s=True)
+
+emails = dict()
 
 
 def main():
@@ -74,6 +77,9 @@ def login():
 def reqister():
     form = RegisterForm()
     users = g.db_sess.query(User)
+    if request.method == "POST":
+        if request.form.get("send_code"):
+            send_email(request.form.get('email'))
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
             return render_template('register.html', title='Регистрация', form=form,
@@ -81,6 +87,11 @@ def reqister():
         if g.db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация', form=form,
                                    message="Такой пользователь уже есть")
+        code = emails.get(request.form.get('email'), None)
+        if request.form.get('code') != code:
+            return render_template('register.html', title='Регистрация', form=form,
+                                   message="Неверный код подтверждения")
+        del emails[request.form.get('email')]
         user = User(
             nickname=form.nickname.data,
             email=form.email.data,
@@ -355,21 +366,6 @@ def get_joke():
     return render_template("api_joke.html", joke=translated_joke)
 
 
-@app.route("/easter", methods=["GET"])
-def easter():
-    joke = cowsay.get_output_string('tux', """- По радио сообщили о переходе на зимнее время, сказав, что «этой ночью,
-     ровно в 03:00 нужно перевести стрелку часов на один час назад, на 02:00».
-     - У всех программистов эта ночь зависла в бесконечном цикле.
-     """).replace("'", "`")
-    return render_template("easter.html", easter=joke)
-
-
-@app.route("/thanks", methods=["GET"])
-def thanks():
-    text = Figlet(font='5lineoblique')
-    return render_template("easter.html", easter=text.renderText('Thanks, Yandex Lyceum!'))
-
-
 @app.route("/delete_user/<int:id_user>")
 @login_required
 def delete_user(id_user):
@@ -379,6 +375,26 @@ def delete_user(id_user):
     g.db_sess.delete(user)
     g.db_sess.commit()
     return redirect('/users')
+
+
+def send_email(mail):
+    sender = 'mercuryanecdots@gmail.com'
+    pswd = 'iamdeadinside1337'
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+
+    try:
+        server.login(sender, pswd)
+        code = randint(100000, 999999)
+        emails[mail] = str(code)
+        message = f'Код подтверждения вашей почты: {code}'
+        msg = MIMEText(message)
+        msg["Subject"] = "Подтверждение почты"
+        server.sendmail(sender, mail, msg.as_string())
+
+    except Exception as ex:
+        return f'{ex}'
 
 
 if __name__ == '__main__':
